@@ -1,4 +1,6 @@
 <?php
+// namespace sert à organiser et structurer le code en regroupant les classes selon leurs fonctions
+//ça agit comme un chemin virtuel pour identifier les classes dans un projet
 namespace App\Controller;
 
 // j'appelle les fichiers de symfony que j'utilise sur cette page donc :
@@ -18,7 +20,7 @@ class HomeController
     public function home(): Response
     {
         // je retourne une instance avec un h1 de ma page d'accueil
-        return new Response('<h1>Ma page d\'accueil</h1>', 200); // 200 = Code HTTP OK
+        return new Response('<h1>Ma page d\'accueil</h1>', 200);
     }
 
 }
