@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PokerLand</title>
+</head>
+
+<body>
+<h1>Bienvenue sur POKER LAAAAAND</h1>
+<main>
+    {% for article in articles %}
+    <article>
+        <h2>{{ article.title }}</h2>
+        <p>{{ article.content }}</p>
+        <div><img src="{{ article.image }}" alt="{{ article.title }}"></div>
+    </article>
+    {% endfor %}
+</main>
+</body>
+</html>
