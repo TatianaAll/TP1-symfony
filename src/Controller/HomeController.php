@@ -20,8 +20,7 @@ class HomeController extends AbstractController
     // Je créer la méthode home qui me retourne une instance de la classe Response
     public function home(): Response
     {
-
-        // je retourne une instance avec un h1 de ma page d'accueil
+        // je retourne la valeur de cette méthode dans ma view twig
         return $this->render('home.html.twig');
     }
 
