@@ -18,7 +18,7 @@ class PokerController
         //et ça grace au double points ::
         $request = Request::createFromGlobals();
         //je récupère ma variable age à partir des infos du get de mon URL
-        $age = $request->request->get('age');
+        $age = $request->query->get('age');
         //je les affiche avec un var_dum et je tue mon process
         var_dump($age); die;
     }
