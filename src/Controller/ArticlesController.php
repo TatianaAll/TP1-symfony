@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ArticlesController extends AbstractController
 {
+    //je met mes article dans une propriété
     public array $articles = [
         [
             'id' => 1,
@@ -40,6 +41,8 @@ class ArticlesController extends AbstractController
         ]
 
     ];
+
+    //je fais ma méthode getArticle en lui donnant une route
     #[Route('/articles', name: 'articles')]
     public function getArticles(){
         return $this->render('articles.html.twig', ['articles' => $this->articles]);
