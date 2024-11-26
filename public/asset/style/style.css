@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-image: url('../image/rainbow.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+    height: 25vh;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+h1 {
+    width: 100%;
+    font-family: sans-serif;
+}
+
+nav {
+    width: 100%;
+
+}
+
+nav > ul {
+    height: 10vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(0,0,129,0.5);
+    list-style: none;
+}
+
+a {
+    color: wheat;
+    text-decoration: none;
+    font-family: sans-serif;
+}
