@@ -21,7 +21,7 @@ class HomeController extends AbstractController
     public function home(): Response
     {
         // je retourne la valeur de cette méthode dans ma view twig
-        return $this->render('home.html.twig');
+        return $this->render('base.html.twig');
     }
 
 }

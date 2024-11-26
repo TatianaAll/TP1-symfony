@@ -1,7 +1,8 @@
-{% include 'partials/_header.html.twig' %}
+{% extends 'base.html.twig' %}
 
-<main>
+{% block metatitle%} Super Article | Resultat de la recherche {% endblock metatitle %}
+
+{% block main %}
     <h2>Resultat pour la recherche {{ search }}</h2>
-</main>
+{% endblock main %}
 
-{% include 'partials/_footer.html.twig' %}

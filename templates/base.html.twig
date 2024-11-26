@@ -5,7 +5,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Articles en ligne</title>
+    {# Je vais vouloir modifier mon meta title selon la page affiché donc --> 1 block #}
+    <title>{% block metatitle %} {% endblock metatitle %}</title>
     <link rel="stylesheet" href= {{ asset('asset/style/style.css') }}>
 </head>
 
@@ -27,5 +28,15 @@
         </ul>
     </nav>
 
-
 </header>
+
+<main>
+    {% block main %}
+    {% endblock main %}
+</main>
+
+<footer>
+    <p>Made with <3</p>
+</footer>
+</body>
+</html>

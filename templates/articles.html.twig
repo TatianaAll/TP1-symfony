@@ -1,6 +1,9 @@
-{% include 'partials/_header.html.twig' %}
+{% extends 'base.html.twig' %}
 
-<main class="isFlex">
+{% block metatitle %} Super Article | Tous les article {% endblock metatitle %}
+
+{% block main %}
+<section class="isFlex">
     {#je fais une boucle sur tous mes articles #}
     {% for article in articles %}
     <article>
@@ -14,6 +17,6 @@
         <div class = 'imgContainer'><img src="{{ article.image }}" alt="{{ article.title }}" class="img"></div>
     </article>
     {% endfor %}
-</main>
+</section>
+{% endblock main %}
 
-{% include 'partials/_footer.html.twig' %}
