@@ -51,20 +51,18 @@ class ArticlesController extends AbstractController
     }
 
     // je fais une méthode pour filtrer mes articles par ID
-    #[Route('/article', name: 'article_show')]
-    public function showArticle()
+    //pour ma route je précise une URL avec une variable ID
+    //quand je demanderais mon URL avec /article/2 j'aurai l'article correspondant à article 2
+    //quand je demanderais un URL avec /article/5 je devrait avoir l'article 5 etc.
+    #[Route('/article/{id}', name: 'article_show')]
+    //vu que j'ai une variable dans mon URL je suis obligée de demander cette variable en parametre de ma methode
+    // j'ajoute donc un parametre id
+    public function showArticle($id)
     {
         $this->getArticles();
 
         // j'initie un articleFound à null
         $articleFound = null;
-
-        // je vais récupérer mes commande de server, donc notamment mes entrées en GET
-        // pour ça j'utilise la class Request et la methode createFromGlobals
-        $request = Request::createFromGlobals();
-        //ici je stocke dans une variable id la valeur GET récupérée par createFromGlobals
-        // et je prend spécifiquement la valeur pour la clé 'id'
-        $id = $request->query->get('id');
 
         // je parcours mes articles récupérés
         foreach ($this->articles as $article) {
@@ -74,6 +72,7 @@ class ArticlesController extends AbstractController
                 $articleFound = $article;
                 return $this->render('article_show.html.twig', ['article' => $article]);
             }
+            //si je n'ai rien qui correspond je renvoie une page d'erreur
         } return $this->render('error_404.html.twig');
     }
 }
