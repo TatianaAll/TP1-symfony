@@ -43,20 +43,13 @@ class ArticlesController extends AbstractController
 
     ];
 
-    //je fais ma méthode getArticle en lui donnant une route
     #[Route('/articles', name: 'articles')]
     public function getArticles()
     {
         return $this->render('articles.html.twig', ['articles' => $this->articles]);
     }
 
-    // je fais une méthode pour filtrer mes articles par ID
-    //pour ma route je précise une URL avec une variable ID
-    //quand je demanderais mon URL avec /article/2 j'aurai l'article correspondant à article 2
-    //quand je demanderais un URL avec /article/5 je devrait avoir l'article 5 etc.
     #[Route('/article/{id}', name: 'article_show')]
-    //vu que j'ai une variable dans mon URL je suis obligée de demander cette variable en parametre de ma methode
-    // j'ajoute donc un parametre id
     public function showArticle($id)
     {
         //je recupere mes articles
@@ -75,5 +68,19 @@ class ArticlesController extends AbstractController
             }
             //si je n'ai rien qui correspond je renvoie une page d'erreur
         } return $this->render('error_404.html.twig');
+    }
+
+    //on va faire une nouvelle page pour filtrer par categorie : 1- routing
+    #[Route('/articles/search_results', name: 'articles_search_result')]
+    // j'utilise dans ma methode un autowire
+    //je vais donc lui passer en parametre $request en précisant avec le typage que
+    //$request est une instance de la class Request
+    //symfony va m'autocomplété tout pour me faire cette instance de classe sans que j'ai besoin
+    // de préciser les parametres du constructeur
+    public function searchArticle(Request $request){
+
+        $search = $request->query->get('search');
+
+        dump($search); die;
     }
 }
