@@ -3,16 +3,15 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ArticlesController extends AbstractController
 {
     //je met mes article dans une propriété
-
-
     #[Route('/articles', name: 'articles')]
-    public function getArticles()
+    public function getArticles() : Response
     {
         $articles = [
             [
@@ -54,8 +53,8 @@ class ArticlesController extends AbstractController
         return $this->render('articles.html.twig', ['articles' => $articles]);
     }
 
-    #[Route('/article/{id}', name: 'article_show')]
-    public function showArticle($id)
+    #[Route('/article/{id}', 'article_show', ['id'=>'\d+'])]
+    public function showArticle(int $id) : Response
     {
         //je recupere mes articles
         $articles = [
@@ -102,7 +101,7 @@ class ArticlesController extends AbstractController
         // je parcours mes articles récupérés
         foreach ($articles as $article) {
             // si l'id de mon article correspond à l'id stocké depuis le get
-            if ($article['id'] === (int)$id) {
+            if ($article['id'] === $id) {
                 //alors je donne à mon articleFound les données de mon article avec le meme id
                 $articleFound = $article;
                 return $this->render('article_show.html.twig', ['article' => $article]);
@@ -119,7 +118,7 @@ class ArticlesController extends AbstractController
         //$request est une instance de la class Request
         //symfony va m'autocompléter tout pour me faire cette instance de classe sans que j'ai besoin
         // de préciser les parametres du constructeur
-    public function searchArticle(Request $request)
+    public function searchArticle(Request $request) : Response
     {
 
         //ma variable search contient les informations de get de la requete HTTP
