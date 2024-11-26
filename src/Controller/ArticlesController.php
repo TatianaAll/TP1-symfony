@@ -59,6 +59,7 @@ class ArticlesController extends AbstractController
     // j'ajoute donc un parametre id
     public function showArticle($id)
     {
+        //je recupere mes articles
         $this->getArticles();
 
         // j'initie un articleFound à null

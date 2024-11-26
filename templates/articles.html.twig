@@ -4,8 +4,13 @@
     {#je fais une boucle sur tous mes articles #}
     {% for article in articles %}
     <article>
-        <h2>{{ article.title }}</h2>
+        <h2 class="inArticle">{{ article.title }}</h2>
         <p>{{ article.content }}</p>
+
+        {# je fais un lien qui me conduira sur l'article sur lequel je clique
+        Donc j'ajour un a avec un href --> dans ce href j'utilise path avec e#}
+        <a href="{{ path('article_show', {id: article.id}) }}" class="linkArticle">Voir l'article</a>
+
         <div class = 'imgContainer'><img src="{{ article.image }}" alt="{{ article.title }}" class="img"></div>
     </article>
     {% endfor %}

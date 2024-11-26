@@ -68,4 +68,13 @@ article{
 }
 #errorPage{
     color: darkred;
+    text-align: center;
+}
+.inArticle{
+    text-align: center;
+    color:saddlebrown;
+}
+.linkArticle{
+    margin:auto;
+    color:chartreuse;
 }
