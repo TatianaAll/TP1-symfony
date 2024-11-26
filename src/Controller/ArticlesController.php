@@ -75,12 +75,12 @@ class ArticlesController extends AbstractController
     // j'utilise dans ma methode un autowire
     //je vais donc lui passer en parametre $request en précisant avec le typage que
     //$request est une instance de la class Request
-    //symfony va m'autocomplété tout pour me faire cette instance de classe sans que j'ai besoin
+    //symfony va m'autocompléter tout pour me faire cette instance de classe sans que j'ai besoin
     // de préciser les parametres du constructeur
     public function searchArticle(Request $request){
 
         $search = $request->query->get('search');
+        return $this->render('articles_search_result.html.twig', ['search' => $search]);
 
-        dump($search); die;
     }
 }
