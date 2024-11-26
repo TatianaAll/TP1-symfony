@@ -52,3 +52,7 @@ p {
 .imgContainer{
     width: 20%;
 }
+#errorPage{
+    color: darkred;
+    text-align: center;
+}

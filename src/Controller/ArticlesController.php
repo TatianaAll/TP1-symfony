@@ -73,7 +73,7 @@ class ArticlesController extends AbstractController
                 //alors je donne à mon articleFound les données de mon article avec le meme id
                 $articleFound = $article;
                 return $this->render('article_show.html.twig', ['article' => $article]);
-            } return $this->render('error_404.html.twig');
-        }
+            }
+        } return $this->render('error_404.html.twig');
     }
 }
