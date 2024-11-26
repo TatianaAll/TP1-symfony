@@ -79,7 +79,9 @@ class ArticlesController extends AbstractController
     // de préciser les parametres du constructeur
     public function searchArticle(Request $request){
 
+        //ma variable search contient les informations de get de la requete HTTP
         $search = $request->query->get('search');
+        //je retourne cette variable dans la page twig associée
         return $this->render('articles_search_result.html.twig', ['search' => $search]);
 
     }
