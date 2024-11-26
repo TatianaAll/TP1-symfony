@@ -8,7 +8,7 @@
     {% for article in articles %}
     <article>
         <h2 class="inArticle">{{ article.title }}</h2>
-        <p>{{ article.content }}</p>
+        <p>{{ article.content }}, créé le {{ article.createdAt|date("d/m/Y") }}</p>
 
         {# je fais un lien qui me conduira sur l'article sur lequel je clique
         Donc j'ajour un a avec un href --> dans ce href j'utilise path avec e#}
