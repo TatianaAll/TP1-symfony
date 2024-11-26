@@ -1,13 +1,12 @@
 {% include 'partials/_header.html.twig' %}
 
 <main>
-
     {#je fais une boucle sur tous mes articles #}
     {% for article in articles %}
     <article>
         <h2>{{ article.title }}</h2>
         <p>{{ article.content }}</p>
-        <div><img src="{{ article.image }}" alt="{{ article.title }}"></div>
+        <div class = 'imgContainer'><img src="{{ article.image }}" alt="{{ article.title }}" class="img"></div>
     </article>
     {% endfor %}
 </main>

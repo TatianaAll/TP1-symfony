@@ -1,0 +1,11 @@
+{% include 'partials/_header.html.twig' %}
+
+<main>
+    <article>
+        <h2>{{ article.title }}</h2>
+        <p>{{ article.content }}</p>
+        <div class='imgContainer'><img src="{{ article.image }}" alt="{{ article.title }}" class="img"></div>
+    </article>
+</main>
+
+{% include 'partials/_footer.html.twig' %}

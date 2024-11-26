@@ -40,3 +40,15 @@ a {
     text-decoration: none;
     font-family: sans-serif;
 }
+
+p {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.img{
+    width: 100%;
+}
+.imgContainer{
+    width: 20%;
+}
