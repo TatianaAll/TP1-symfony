@@ -11,7 +11,7 @@ class ArticlesController extends AbstractController
 {
     //je met mes article dans une propriété
     #[Route('/articles', name: 'articles')]
-    public function getArticles() : Response
+    public function getArticles(): Response
     {
         $articles = [
             [
@@ -53,8 +53,8 @@ class ArticlesController extends AbstractController
         return $this->render('articles.html.twig', ['articles' => $articles]);
     }
 
-    #[Route('/article/{id}', 'article_show', ['id'=>'\d+'])]
-    public function showArticle(int $id) : Response
+    #[Route('/article/{id}', 'article_show', ['id' => '\d+'])]
+    public function showArticle(int $id): Response
     {
         //je recupere mes articles
         $articles = [
@@ -104,11 +104,12 @@ class ArticlesController extends AbstractController
             if ($article['id'] === $id) {
                 //alors je donne à mon articleFound les données de mon article avec le meme id
                 $articleFound = $article;
-                return $this->render('article_show.html.twig', ['article' => $article]);
             }
             //si je n'ai rien qui correspond je renvoie une page d'erreur
         }
-        return $this->render('error_404.html.twig');
+        if ($articleFound === null) {
+            return $this->redirectToRoute('error_404.html.twig');
+        } return $this->render('article_show.html.twig', ['article' => $articleFound]);
     }
 
     //on va faire une nouvelle page pour filtrer par categorie : 1- routing
@@ -118,7 +119,7 @@ class ArticlesController extends AbstractController
         //$request est une instance de la class Request
         //symfony va m'autocompléter tout pour me faire cette instance de classe sans que j'ai besoin
         // de préciser les parametres du constructeur
-    public function searchArticle(Request $request) : Response
+    public function searchArticle(Request $request): Response
     {
 
         //ma variable search contient les informations de get de la requete HTTP
@@ -127,4 +128,5 @@ class ArticlesController extends AbstractController
         return $this->render('articles_search_result.html.twig', ['search' => $search]);
 
     }
+
 }

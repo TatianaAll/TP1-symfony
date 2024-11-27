@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block metatitle %} Super Article | Formulaire de contact {% endblock metatitle %}
+
+{% block main %}
+    <form method="POST" action="{{ path ('contactSubmit')}}">
+        <div>
+            <label for="name">Nom et prénom</label>
+            <input type="text" name="name" id="name" placeholder="Nom et prénom">
+        </div>
+
+        <div>
+            <label for="email">Adresse mail</label>
+            <input type="text" name="email" id="email" placeholder="Adresse mail">
+        </div>
+        <div>
+            <label for="subject">Sujet</label>
+            <input type="text" name="subject" id="subject" placeholder="Sujet">
+        </div>
+        <div>
+            <label for="message_area">Votre message</label>
+            <textarea id="message_area" ></textarea>
+        </div>
+        <div>
+            <button type="submit">Envoyer</button>
+        </div>
+    </form>
+
+
+
+{% endblock main %}
