@@ -3,7 +3,21 @@
 {% block metatitle %} Super Article | Formulaire de contact {% endblock metatitle %}
 
 {% block main %}
-    <form method="POST" action="{{ path ('contactSubmit')}}">
+
+    {% if email is not null and subject is not null and message is not null%}
+        <p>Formulaire bien envoyé merci !</p>
+
+        <p>Résumé de la demande : </p>
+        <ul>
+            <li>Votre nom : {{ name }}</li>
+            <li>Votre adresse mail :{{ email }}</li>
+            <li>Le sujet de contact : {{ subject }}</li>
+            <li>Votre message {{ message_area }}</li>
+        </ul>
+
+    {% else %}
+
+    <form method="POST" >
         <div>
             <label for="name">Nom et prénom</label>
             <input type="text" name="name" id="name" placeholder="Nom et prénom">
@@ -11,21 +25,20 @@
 
         <div>
             <label for="email">Adresse mail</label>
-            <input type="text" name="email" id="email" placeholder="Adresse mail">
+            <input type="text" name="email" id="email" placeholder="Adresse mail" required>
         </div>
         <div>
             <label for="subject">Sujet</label>
-            <input type="text" name="subject" id="subject" placeholder="Sujet">
+            <input type="text" name="subject" id="subject" placeholder="Sujet" required>
         </div>
         <div>
             <label for="message_area">Votre message</label>
-            <textarea id="message_area" ></textarea>
+            <textarea id="message_area" name="message_area" required></textarea>
         </div>
         <div>
             <button type="submit">Envoyer</button>
         </div>
     </form>
 
-
-
+    {% endif %}
 {% endblock main %}
