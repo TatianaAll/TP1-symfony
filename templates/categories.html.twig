@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block metatitle %} Super Article | Toutes les catégories {% endblock metatitle %}
+
+{% block main %}
+    <section class="isFlex">
+        {#je fais une boucle sur tous mes articles #}
+        {% for category in categories %}
+            <article>
+                <h2 class="inArticle" >{{ category.title }}</h2>
+                <p>{{ category.color }}</p>
+            </article>
+        {% endfor %}
+    </section>
+{% endblock main %}
+
