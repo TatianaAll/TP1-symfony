@@ -4,41 +4,44 @@
 
 {% block main %}
 
-    {% if email is not null and subject is not null and message is not null%}
-        <p>Formulaire bien envoyé merci !</p>
+    {% if email is not null and subject is not null and message_area is not null %}
+        <section class="formSection">
+            <p>Formulaire bien envoyé merci !</p>
 
-        <p>Résumé de la demande : </p>
-        <ul>
-            <li>Votre nom : {{ name }}</li>
-            <li>Votre adresse mail :{{ email }}</li>
-            <li>Le sujet de contact : {{ subject }}</li>
-            <li>Votre message {{ message_area }}</li>
-        </ul>
+            <p>Résumé de la demande : </p>
+            <ul id="formSend">
+                <li><span>Votre nom</span> : {{ name }}</li>
+                <li><span>Votre adresse mail</span> : {{ email }}</li>
+                <li><span>Le sujet de contact</span> : {{ subject }}</li>
+                <li><span>Votre message</span> : {{ message_area }}</li>
+            </ul>
+        </section>
 
     {% else %}
 
-    <form method="POST" >
-        <div>
-            <label for="name">Nom et prénom</label>
-            <input type="text" name="name" id="name" placeholder="Nom et prénom">
-        </div>
+        <form method="POST" class="formSection">
+            <div class="formContact">
+                <label for="name">Nom et prénom</label>
+                <input type="text" name="name" id="name" placeholder="Nom et prénom">
+            </div>
 
-        <div>
-            <label for="email">Adresse mail</label>
-            <input type="text" name="email" id="email" placeholder="Adresse mail" required>
-        </div>
-        <div>
-            <label for="subject">Sujet</label>
-            <input type="text" name="subject" id="subject" placeholder="Sujet" required>
-        </div>
-        <div>
-            <label for="message_area">Votre message</label>
-            <textarea id="message_area" name="message_area" required></textarea>
-        </div>
-        <div>
-            <button type="submit">Envoyer</button>
-        </div>
-    </form>
+            <div class="formContact">
+                <label for="email">Adresse mail</label>
+                <input type="text" name="email" id="email" placeholder="Adresse mail" required>
+            </div>
+            <div class="formContact">
+                <label for="subject">Sujet</label>
+                <input type="text" name="subject" id="subject" placeholder="Sujet" required>
+            </div>
+            <div class="formContact">
+                <label for="message_area">Votre message</label>
+                <textarea id="message_area" name="message_area" required></textarea>
+            </div>
+            <div class="formContact">
+                <button type="submit">Envoyer</button>
+            </div>
+        </form>
 
     {% endif %}
+
 {% endblock main %}

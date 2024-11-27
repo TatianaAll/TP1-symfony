@@ -14,6 +14,13 @@ header {
     align-items: flex-end;
     flex-direction: column;
     justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+body{
+    background-image: url('../image/clouds.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 h1 {
@@ -77,4 +84,32 @@ article{
 .linkArticle{
     margin:auto;
     color:chartreuse;
+}
+
+#formSend{
+    font-family: sans-serif;
+    list-style: none;
+    margin: auto;
+}
+.formSection{
+    background-color: lightpink;
+    border-radius: 5vmax;
+    margin: auto;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+}
+
+#formSend>li>span{
+    font-weight: 600;
+}
+#formSend>li{
+    margin: 1rem;
+}
+.formContact{
+    margin: 0.3rem;
+    font-family: sans-serif;
 }
