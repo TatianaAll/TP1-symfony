@@ -56,11 +56,12 @@ class ArticlesController extends AbstractController
     {
         $article = new Article();
         //dd("coucou");
+        //si j'ai une demande en POST
         if ($request->isMethod('POST')) {
             //créer un article
             //en faisant une nouvelle instance de l'entité Article
 
-
+            //je récupère mes nouvelles valeurs via mon post
             $newTitle = $request->request->get('title');
             $newContent = $request->request->get('content');
             $newImage = $request->request->get('image');
@@ -79,7 +80,7 @@ class ArticlesController extends AbstractController
             $entityManager->flush();
             return $this->render('article_create.html.twig', ['article' => $article]);
         }
-
+        //si j'ai pas de demande je renvoi juste mon nouvel article vide
         return $this->render('article_create.html.twig', ['article' => $article]);
     }
 

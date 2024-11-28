@@ -4,6 +4,7 @@
 
     <h2>Création d'article</h2>
 
+    {# Si mon article a toutes les variables obligatoire définies alors j'affiche mon récap #}
     {% if article.title is not null and article.content is not null %}
     <section class="formSection">
         <p>Enregistrement de la création du nouvel article "{{ article.title }}" ;)</p>
@@ -20,7 +21,7 @@
 
     {% else %}
 
-
+    {# Sinon j'affiche mon formulaire pour création d'un nouvel article#}
     <section>
         <form method="POST">
             <div>
