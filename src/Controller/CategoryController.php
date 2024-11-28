@@ -2,6 +2,7 @@
 
 // Entité Category créé à partir du terminal grace à : php bin/console make:entity
 // création automatique de mon entité Category et de son repo
+//le repo ne permet que des faire des SELECT et pas de modifier avec des INSERT ou quoi
 //  Ensuite je fais php bin/console make:migration qui permet de faire la migration
 // ca crée une version dans migrations
 // pour finir j'envoie ça dans ma BDD avec php bin/console make:migration:migrate
@@ -36,13 +37,17 @@ class CategoryController extends AbstractController
     //ma nouvelle route pour mes categories selon leurs id
     //je l'oblige à avoir un id et que l'id soit un integer (en regex)
     #[Route(path: '/category/{id}', name:'category_show', requirements:['id' => '\d+'])]
+    //nouvelle méthode avec un autowire de CategoryRepo et un id qui sera un integer
     public function getCategoryById(CategoryRepository $categoryRepository, int $id)
     {
         // j'initie un articleFound à null
         $categoryFound = $categoryRepository->find($id);
 
+        //si je ne trouve pas de categorie
         if ($categoryFound === null) {
+            //je redirige vers une 404
             return $this->redirectToRoute('error_404.html.twig');
         } return $this->render('category_show.html.twig', ['category' => $categoryFound]);
+        //sinon je renvoie ma page twig en lui donnant ma categorie trouvé précédement
     }
 }

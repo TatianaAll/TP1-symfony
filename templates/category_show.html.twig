@@ -3,10 +3,12 @@
 {% block metatitle %} Super Article | Catégorie {% endblock metatitle %}
 
 {% block main %}
-    <section class="isFlex">
-        {#je fais une boucle sur tous mes articles #}
-        <h2>{{ category.title }}</h2>
-        <p>{{ category.color }}</p>
+    <section>
+        <article class="categoryArticle" style="border: {{ category.color }} dashed 2px;">
+            {# je fais une boucle sur tous mes articles #}
+            <h2 style="color: {{ category.color }}" class="h2Category">{{ category.title }}</h2>
+            <p>{{ category.color }}</p>
+        </article>
     </section>
 {% endblock main %}
 
