@@ -93,4 +93,6 @@ class CategoryController extends AbstractController
         $entityManager->flush();
         return $this->render('category_delete.html.twig', ['category' => $categoryToDelete]);
     }
+
+
 }

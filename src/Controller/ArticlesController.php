@@ -96,8 +96,37 @@ class ArticlesController extends AbstractController
         $entityManager->remove($articleToDelete);
         //on envoie l'info de la suppression à la DB
         $entityManager->flush();
-        
+
         return $this->render('article_delete.html.twig', ['article' => $articleToDelete]);
+    }
+
+    #[Route(path:'/article/update/{id}', name: 'article_update', requirements: ['id'=>'\d+'])]
+    function updateArticle(int $id, EntityManagerInterface $entityManager, ArticleRepository $articleRepository): Response
+    {
+        //dd("coucou");
+
+        //je récupère l'article qui correspond à mon ID rentré
+        $articleToUpdate = $articleRepository->find($id);
+
+        //s'il n'existe pas on renvoie vers une 404
+        if (!$articleToUpdate) {
+            return $this->redirectToRoute('not_found');
+        }
+        //dump($articleToUpdate);
+
+        //on va modifier les données de notre instance récupérée selon ce que l'on veut
+        $articleToUpdate->setTitle("Un nouvel article mais qui n'en ai pas un");
+        $articleToUpdate->setContent("Une Mise à jour de fifou dingo");
+
+        //dd($articleToUpdate);
+
+        //on va donc faire persister notre instance d'Article modifiée
+        $entityManager->persist($articleToUpdate);
+        //puis on va sauvegarder les modifs en DB
+        $entityManager->flush();
+
+        //on retourne une vue qui nous montre notre update
+        return $this->render('article_update.html.twig', ['article' => $articleToUpdate]);
     }
 
 }
