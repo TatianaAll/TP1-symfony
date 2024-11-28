@@ -11,7 +11,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Repository\CategoryRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,5 +52,28 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('error_404.html.twig');
         } return $this->render('category_show.html.twig', ['category' => $categoryFound]);
         //sinon je renvoie ma page twig en lui donnant ma categorie trouvé précédement
+    }
+
+    #[Route(path:'/category/create', name: 'category_create')]
+    //j'autowire mon EntityManager pour faire une sauvegarde dans ma BDD
+    public function createCategory(EntityManagerInterface $entityManager) : Response
+    {
+        //dd("coucou");
+
+        //je crée une nouvelle instance de l'entité Category
+        $category = new Category();
+        //je la complète avec les setter de l'entité
+        $category->setTitle('Culture');
+        $category->setColor('purple');
+
+        //dd($category);
+
+        //Je vais envoyer les infos de cette nouvelle catégorie :
+        $entityManager->persist($category);
+        //puis je vais les inscrire en BDD avec flush
+        $entityManager->flush();
+
+        return new Response("Bravo !");
+
     }
 }

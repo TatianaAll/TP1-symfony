@@ -66,7 +66,7 @@ class ArticlesController extends AbstractController
         //dd($article);
 
         //une fois notre instance créée, l'ORM pourra faire correspondre cette instance avec le SQL
-        //utilisation de EntityManager
+        //utilisation de EntityManagerInterface
         //on ''''''commit'''''', on envoie nos modif
         $entityManager->persist($article);
         //puis on '''push''' donc on envoie à notre BDD le nouvel article
