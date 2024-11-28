@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -45,6 +47,32 @@ class ArticlesController extends AbstractController
         //je retourne cette variable dans la page twig associée
         return $this->render('articles_search_result.html.twig', ['search' => $search]);
 
+    }
+
+    #[Route(path:'/article/create', name:'article_create')]
+    public function createArticle(EntityManagerInterface $entityManager): Response{
+        //dd("coucou");
+
+        //créer un article
+        //en faisant une nouvelle instance de l'entité Article
+        $article = new Article();
+
+        //Puis on rempli notre nouvel article avec les méthodes set de la classe Article
+        $article->setTitle('Un article fait à la mains');
+        $article->setContent('Un article de qualité, créé à la main, moulé dans un moule et sorti tout chaud du four de Symfony');
+        $article->setCreatedAt(new \DateTime());
+        $article->setImage('https://labonneflambee.fr/49-large_default/four-a-tarte-flambee-et-pizza-le-wackes.jpg');
+        //on vérifie que ça fonctionne bien
+        //dd($article);
+
+        //une fois notre instance créée, l'ORM pourra faire correspondre cette instance avec le SQL
+        //utilisation de EntityManager
+        //on ''''''commit'''''', on envoie nos modif
+        $entityManager->persist($article);
+        //puis on '''push''' donc on envoie à notre BDD le nouvel article
+        $entityManager->flush();
+
+        return new Response('Bravo');
     }
 
 }

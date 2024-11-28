@@ -14,6 +14,7 @@ namespace App\Controller;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 //j'aurai besoin que ma class hérite de AbstractController pour utiliser la methode render
 class CategoryController extends AbstractController
@@ -22,7 +23,7 @@ class CategoryController extends AbstractController
 
     #[Route(path :'/categories', name: 'categories')]
     //je fais un autowire de category repo pour pouvoir questionner ma BDD
-    public function showAllCategories(CategoryRepository $categoryRepository)
+    public function showAllCategories(CategoryRepository $categoryRepository) : Response
     {
         //je vérifie ma route
 //        dump("coucou");die;
@@ -38,7 +39,7 @@ class CategoryController extends AbstractController
     //je l'oblige à avoir un id et que l'id soit un integer (en regex)
     #[Route(path: '/category/{id}', name:'category_show', requirements:['id' => '\d+'])]
     //nouvelle méthode avec un autowire de CategoryRepo et un id qui sera un integer
-    public function getCategoryById(CategoryRepository $categoryRepository, int $id)
+    public function getCategoryById(CategoryRepository $categoryRepository, int $id) : Response
     {
         // j'initie un articleFound à null
         $categoryFound = $categoryRepository->find($id);
