@@ -92,9 +92,11 @@ class ArticlesController extends AbstractController
         }
 
         //dd($articleToDelete);
+        //On retire en local notre article
         $entityManager->remove($articleToDelete);
+        //on envoie l'info de la suppression à la DB
         $entityManager->flush();
-
+        
         return $this->render('article_delete.html.twig', ['article' => $articleToDelete]);
     }
 

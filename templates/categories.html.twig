@@ -9,6 +9,10 @@
             <article class="categoryArticle" style="border: {{ category.color }} dashed 2px;">
                 <h2 class="inArticle" style="color:{{ category.color }}">{{ category.title }}</h2>
                 <p>{{ category.color }}</p>
+                <ul>
+                    <li class="liViewSuppr"><a href="{{ path('category_show', {id: category.id}) }}" class="linkArticle">Voir la catégorie</a></li>
+                    <li class="liViewSuppr"><a href="{{ path('category_delete', {id: category.id}) }}" class="linkArticle">Supprimer la catégorie</a></li>
+                </ul>
             </article>
         {% endfor %}
     </section>

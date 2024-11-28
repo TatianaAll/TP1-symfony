@@ -126,3 +126,7 @@ article{
 .marginAuto{
     margin: auto;
 }
+.liViewSuppr{
+    list-style: none;
+    text-align: center;
+}
