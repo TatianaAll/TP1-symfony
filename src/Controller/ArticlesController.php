@@ -75,4 +75,27 @@ class ArticlesController extends AbstractController
         return $this->render('article_create.html.twig', ['article' => $article]);
     }
 
+    //je fais ma route pour ma suppression d'article, je donne un id en URL en m'assurant que c'est un integer avec une regex
+    #[Route (path:'/article/delete/{id}', name: 'article_delete', requirements: ['id'=>'\d+'])]
+    //je doit avoir un id
+    //j'appelle une instance de mon Article Repo car je vais avoir besoin de parcourir toutes mes instances de l'entité Article qui sont créée
+   //j'appelle une instance d'EntityManager pour pouvoir modifier ma BDD
+    public function deleteArticle(int $id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager): Response
+    {
+        //dd("coucou");
+        //on va chercher l'article avec l'ID qui matche notre recherche
+        $articleToDelete = $articleRepository->find($id);
+
+        //si on trouve pas on redirige vers une page d'erreur
+        if (!$articleToDelete) {
+            return $this->redirectToRoute('not_found');
+        }
+
+        //dd($articleToDelete);
+        $entityManager->remove($articleToDelete);
+        $entityManager->flush();
+
+        return $this->render('article_delete.html.twig', ['article' => $articleToDelete]);
+    }
+
 }
