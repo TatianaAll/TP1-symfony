@@ -1,11 +1,44 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-<section>
-    <div>
+
+    <h2>Création d'article</h2>
+
+    {% if article.title is not null and article.content is not null %}
+    <section class="formSection">
         <p>Enregistrement de la création du nouvel article "{{ article.title }}" ;)</p>
-    </div>
-</section>
+
+        <p>Résumé du nouvel article : </p>
+        <ul id="formSend">
+            <li><span>Titre</span> : {{ article.title }}</li>
+            <li><span>Contenu de l'article</span> : {{ article.content }}</li>
+            <li><span>l'image</span> :
+                <div><img src="{{ article.image }}" alt="{{ article.title }}"/></div>
+            </li>
+        </ul>
+    </section>
+
+    {% else %}
+
+
+    <section>
+        <form method="POST">
+            <div>
+                <label for="title">Titre</label>
+                <input type="text" name="title" placeholder="Titre" required>
+            </div>
+            <div>
+                <label for="content">Contenu de l'article</label>
+                <input type="text" name="content" placeholder="contenu" required>
+            </div>
+            <div>
+                <label for="image">Lien URL de l'image</label>
+                <input type="text" name="image" placeholder="Image">
+            </div>
+            <button type="submit">Envoyer</button>
+        </form>
+    </section>
+    {% endif %}
 {% endblock %}
 
 {% block metatitle %}
