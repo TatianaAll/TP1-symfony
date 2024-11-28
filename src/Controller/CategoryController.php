@@ -94,5 +94,33 @@ class CategoryController extends AbstractController
         return $this->render('category_delete.html.twig', ['category' => $categoryToDelete]);
     }
 
+    #[Route(path:'/category/update/{id}', name: 'category_update', requirements: ['id'=>'\d+'])]
+    public function updateCategory(int $id,
+                                   EntityManagerInterface $entityManager,
+                                   CategoryRepository $categoryRepository) : Response
+    {
+        //dd("coucou");
+
+        //on cherche l'instance de Catégorie qui répond à l'id entré
+        $categoryToUpdate = $categoryRepository->find($id);
+        //si elle n'exsite pas c'est un 404
+        if (!$categoryToUpdate) {
+            return $this->redirectToRoute('not_found');
+        }
+
+        //dd($categoryToUpdate);
+
+        //on changes les infos de notre catégorie
+        $categoryToUpdate->setTitle('News');
+
+        //on enregistre les changements en local
+        $entityManager->persist($categoryToUpdate);
+        //on envoie les changement à la DB
+        $entityManager->flush();
+
+        // on retourne une jolie page qui dit que c'est bon
+        return $this->render('category_update.html.twig', ['category' => $categoryToUpdate]);
+    }
+
 
 }

@@ -45,7 +45,7 @@ nav > ul {
     list-style: none;
 }
 
-a {
+.liHeader {
     color: wheat;
     text-decoration: none;
     font-family: sans-serif;
@@ -84,7 +84,9 @@ article{
 }
 .linkArticle{
     margin:auto;
-    color:chartreuse;
+    text-decoration: none;
+    font-family: sans-serif;
+    color:darkorchid;
 }
 
 #formSend{
@@ -129,4 +131,7 @@ article{
 .liViewSuppr{
     list-style: none;
     text-align: center;
+}
+.linkArticle.delete{
+    color: red;
 }

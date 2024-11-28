@@ -11,7 +11,8 @@
                 <p>{{ category.color }}</p>
                 <ul>
                     <li class="liViewSuppr"><a href="{{ path('category_show', {id: category.id}) }}" class="linkArticle">Voir la catégorie</a></li>
-                    <li class="liViewSuppr"><a href="{{ path('category_delete', {id: category.id}) }}" class="linkArticle">Supprimer la catégorie</a></li>
+                    <li class="liViewSuppr"><a href="{{ path('category_update', {id : article.id}) }}" class="linkArticle">Mettre à jour la categorie</a></li>
+                    <li class="liViewSuppr"><a href="{{ path('category_delete', {id: category.id}) }}" class="linkArticle delete">Supprimer la catégorie</a></li>
                 </ul>
             </article>
         {% endfor %}

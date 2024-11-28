@@ -14,7 +14,9 @@
         Donc j'ajour un a avec un href --> dans ce href j'utilise path avec e#}
         <ul>
             <li class="liViewSuppr"><a href="{{ path('article_show', {id: article.id}) }}" class="linkArticle">Voir l'article</a></li>
-            <li class="liViewSuppr"><a href="{{ path('article_delete', {id: article.id}) }}" class="linkArticle">Supprimer l'article</a></li>
+            <li class="liViewSuppr"><a href="{{ path('article_update', {id : article.id}) }}" class="linkArticle">Mettre à jour l'article</a></li>
+            <li class="liViewSuppr"><a href="{{ path('article_delete', {id: article.id}) }}" class="linkArticle delete">Supprimer l'article</a></li>
+
         </ul>
 
 
