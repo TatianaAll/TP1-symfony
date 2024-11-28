@@ -73,7 +73,8 @@ class CategoryController extends AbstractController
         //puis je vais les inscrire en BDD avec flush
         $entityManager->flush();
 
-        return new Response("Bravo !");
+
+        return $this->render('category_create.html.twig', ['category' => $category]);
 
     }
 }

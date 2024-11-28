@@ -72,7 +72,7 @@ class ArticlesController extends AbstractController
         //puis on '''push''' donc on envoie à notre BDD le nouvel article
         $entityManager->flush();
 
-        return new Response('Bravo');
+        return $this->render('article_create.html.twig', ['article' => $article]);
     }
 
 }
