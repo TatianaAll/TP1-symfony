@@ -76,7 +76,7 @@ class ArticlesController extends AbstractController
         $form->handleRequest($request);
 
         //est-ce que le formulaire a été envoyé pour ce formulaire ?
-        if($form->isSubmitted()) {
+        if ($form->isSubmitted()) {
             //j'ai symfony qui rempli mes champs grace a handleRequest
             //mais j'ai retiré le champs input de la date de création, donc il faut que je la remplisse automatiquement
             $article->setCreatedAt(new DateTime());
@@ -88,7 +88,7 @@ class ArticlesController extends AbstractController
         $formView = $form->createView();
 
         //si j'ai pas de demande je renvoi juste mon nouvel article vide
-        return $this->render('article_create.html.twig', ['formView'=>$formView]);
+        return $this->render('article_create.html.twig', ['formView' => $formView]);
     }
 
 
@@ -97,8 +97,8 @@ class ArticlesController extends AbstractController
     //je doit avoir un id
         //j'appelle une instance de mon Article Repo car je vais avoir besoin de parcourir toutes mes instances de l'entité Article qui sont créée
         //j'appelle une instance d'EntityManager pour pouvoir modifier ma BDD
-    public function deleteArticle(int $id,
-                                  ArticleRepository $articleRepository,
+    public function deleteArticle(int                    $id,
+                                  ArticleRepository      $articleRepository,
                                   EntityManagerInterface $entityManager): Response
     {
         //dd("coucou");
@@ -120,45 +120,39 @@ class ArticlesController extends AbstractController
     }
 
     #[Route(path: '/article/update/{id}', name: 'article_update', requirements: ['id' => '\d+'])]
-    function updateArticle(int $id,
+    function updateArticle(int                    $id,
                            EntityManagerInterface $entityManager,
-                           ArticleRepository $articleRepository,
-                           Request $request): Response
+                           ArticleRepository      $articleRepository,
+                           Request                $request): Response
     {
-        //dd("coucou");
-
         //je récupère l'article qui correspond à mon ID rentré
         $articleToUpdate = $articleRepository->find($id);
-
-        //pour mon affichage twig je crée une variable
-        $postRequest = false;
 
         //s'il n'existe pas on renvoie vers une 404
         if (!$articleToUpdate) {
             return $this->redirectToRoute('not_found');
         }
 
+        //j'auto génère mon formulaire de modification d'article
+        $form = $this->createForm(ArticleType::class, $articleToUpdate);
+
+        //il faut maintenant relier le form avec la requete post lié au formulaire
+        //pour le formulaire généré on récupère les données de la requete réalisé
+        $form->handleRequest($request);
+        //je fais ma variable à envoyer dans mon twig pour la création de mon form en HTML
+        $formView = $form->createView();
+
         //si j'ai ma un submit
-        if($request->isMethod('POST')) {
-            $newTitle = $request->request->get('title');
-            $newContent = $request->request->get('content');
-            $newImage = $request->request->get('image');
-
-            $articleToUpdate->setTitle($newTitle);
-            $articleToUpdate->setContent($newContent);
-            $articleToUpdate->setImage($newImage);
-
-            $postRequest = true;
-
+        if ($form->isSubmitted()) {
+            //si oui alors je sauvegarde mon article et je l'envoie à la DB
             //on va donc faire persister notre instance d'Article modifié
             $entityManager->persist($articleToUpdate);
             //puis on va sauvegarder les modifs en DB
             $entityManager->flush();
-
         }
         //j'envoie à mon twig les valeurs précédentes pour les charger en value dans mes inputs
         //j'envoie aussi mon postRequest pour l'affichage de mon form ou non
-        return $this->render('article_update.html.twig', ['article' => $articleToUpdate, 'postRequest' => $postRequest]);
+        return $this->render('article_update.html.twig', ['formView' => $formView]);
     }
 
 }

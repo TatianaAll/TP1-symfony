@@ -3,41 +3,7 @@
 {% block main %}
 
     <h2>Mise à jour des articles</h2>
-    {% if postRequest %}
-        <section class="formSection showModif">
-            <p>Modification de l''article "{{ article.title }}" ;)</p>
-
-            <p>Résumé de la modification article : </p>
-            <ul id="formSend">
-                <li><span>Titre</span> : {{ article.title }}</li>
-                <li><span>Contenu de l'article</span> : {{ article.content }}</li>
-                <li><span>l'image</span> :
-                    <div class="imgContainer"><img src="{{ article.image }}" alt="{{ article.title }}"/></div>
-                </li>
-            </ul>
-        </section>
-
-    {% else %}
-
-        {# Sinon j'affiche mon formulaire pour modification de l'article avec en value les données précdente#}
-        <section>
-            <form method="POST" class="formSection">
-                <div>
-                    <label for="title">Titre</label>
-                    <input type="text" name="title" placeholder="Titre" required value="{{ article.title }}">
-                </div>
-                <div>
-                    <label for="content">Contenu de l'article</label>
-                    <input type="text" name="content" placeholder="contenu" required value="{{ article.content }}">
-                </div>
-                <div>
-                    <label for="image">Lien URL de l'image</label>
-                    <input type="text" name="image" placeholder="Image" value="{{ article.image }}">
-                </div>
-                <button type="submit">Envoyer</button>
-            </form>
-        </section>
-    {% endif %}
+    {{ form(formView) }}
 
 {% endblock main %}
 
