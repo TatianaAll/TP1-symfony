@@ -84,6 +84,7 @@ class ArticlesController extends AbstractController
         return $this->render('article_create.html.twig', ['article' => $article]);
     }
 
+
     //je fais ma route pour ma suppression d'article, je donne un id en URL en m'assurant que c'est un integer avec une regex
     #[Route (path: '/article/delete/{id}', name: 'article_delete', requirements: ['id' => '\d+'])]
     //je doit avoir un id
@@ -122,6 +123,8 @@ class ArticlesController extends AbstractController
         //je récupère l'article qui correspond à mon ID rentré
         $articleToUpdate = $articleRepository->find($id);
 
+        //pour mon affichage twig je crée une variable
+        $postRequest = false;
 
         //s'il n'existe pas on renvoie vers une 404
         if (!$articleToUpdate) {
@@ -133,23 +136,21 @@ class ArticlesController extends AbstractController
             $newTitle = $request->request->get('title');
             $newContent = $request->request->get('content');
             $newImage = $request->request->get('image');
-        }
 
-        //dump($articleToUpdate);
+            $articleToUpdate->setTitle($newTitle);
+            $articleToUpdate->setContent($newContent);
+            $articleToUpdate->setImage($newImage);
 
-        //on va modifier les données de notre instance récupérée selon ce que l'on veut
-        $articleToUpdate->setTitle("Un nouvel article mais qui n'en ai pas un");
-        $articleToUpdate->setContent("Une Mise à jour de fifou dingo");
+            $postRequest = true;
 
-        //dd($articleToUpdate);
+            //on va donc faire persister notre instance d'Article modifiée
+            $entityManager->persist($articleToUpdate);
+            //puis on va sauvegarder les modifs en DB
+            $entityManager->flush();
 
-        //on va donc faire persister notre instance d'Article modifiée
-        $entityManager->persist($articleToUpdate);
-        //puis on va sauvegarder les modifs en DB
-        $entityManager->flush();
-
-        //on retourne une vue qui nous montre notre update
-        return $this->render('article_update.html.twig', ['article' => $articleToUpdate]);
+            //on retourne une vue qui nous montre notre update
+            return $this->render('article_update.html.twig', ['article' => $articleToUpdate, 'postRequest' => $postRequest]);
+        } return $this->render('article_update.html.twig', ['article' => $articleToUpdate, 'postRequest' => $postRequest]);
     }
 
 }

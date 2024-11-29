@@ -6,7 +6,7 @@
 
     {# Si mon article a toutes les variables obligatoire définies alors j'affiche mon récap #}
     {% if article.title is not null and article.content is not null %}
-    <section class="formSection">
+    <section class="formSection showModif">
         <p>Enregistrement de la création du nouvel article "{{ article.title }}" ;)</p>
 
         <p>Résumé du nouvel article : </p>

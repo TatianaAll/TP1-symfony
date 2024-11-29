@@ -135,3 +135,7 @@ article{
 .linkArticle.delete{
     color: red;
 }
+
+.showModif{
+    height: 100vh;
+}

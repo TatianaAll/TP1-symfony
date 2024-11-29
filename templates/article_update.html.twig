@@ -3,11 +3,11 @@
 {% block main %}
 
     <h2>Mise à jour des articles</h2>
-    {% if article.title is not null and article.content is not null %}
-        <section class="formSection">
-            <p>Enregistrement de la création du nouvel article "{{ article.title }}" ;)</p>
+    {% if postRequest %}
+        <section class="formSection showModif">
+            <p>Modification de l''article "{{ article.title }}" ;)</p>
 
-            <p>Résumé du nouvel article : </p>
+            <p>Résumé de la modification article : </p>
             <ul id="formSend">
                 <li><span>Titre</span> : {{ article.title }}</li>
                 <li><span>Contenu de l'article</span> : {{ article.content }}</li>
