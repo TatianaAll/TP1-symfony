@@ -1,15 +1,41 @@
 {% extends 'base.html.twig' %}
 
+{% block metatitle %}
+    Super Article | Mise à jour d'une catégorie
+{% endblock metatitle %}
+
+
 {% block main %}
 
     <section>
-        <article>
-            <p>La catégorie "{{ category.title }}" a été mise à jour avec succès</p>
-        </article>
-    </section>
-{% endblock main %}
 
-{% block metatitle %}
-Super Article | Mise à jour d'une catégorie
-{% endblock metatitle%}
+        {% if methodPost %}
+            <article>
+                <p>La catégorie "{{ category.title }}" a été mise à jour avec succès</p>
+                <p>La couleur associée est le : "{{ category.color }}"</p>
+            </article>
+
+
+        {% else %}
+
+            <form method="Post" class="formSection">
+                <div>
+                    <label for="title">Titre de la catégorie</label>
+                    <input type="text" name="title" value="{{ category.title }}" required/>
+                </div>
+
+                <div>
+                    <label for="color">Couleur associée à la catégorie</label>
+                    <input type="color" name="color" value="{{ category.color }}" required/>
+                </div>
+
+                <button type="submit">Modifier</button>
+            </form>
+
+
+        {% endif %}
+
+    </section>
+
+{% endblock main %}
 

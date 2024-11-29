@@ -143,7 +143,7 @@ class ArticlesController extends AbstractController
 
             $postRequest = true;
 
-            //on va donc faire persister notre instance d'Article modifiée
+            //on va donc faire persister notre instance d'Article modifié
             $entityManager->persist($articleToUpdate);
             //puis on va sauvegarder les modifs en DB
             $entityManager->flush();
