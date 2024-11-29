@@ -15,6 +15,7 @@ use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -56,24 +57,30 @@ class CategoryController extends AbstractController
 
     #[Route(path:'/category/create', name: 'category_create')]
     //j'autowire mon EntityManager pour faire une sauvegarde dans ma BDD
-    public function createCategory(EntityManagerInterface $entityManager) : Response
+    public function createCategory(EntityManagerInterface $entityManager,
+    Request $request) : Response
     {
         //dd("coucou");
 
         //je crée une nouvelle instance de l'entité Category
         $category = new Category();
-        //je la complète avec les setter de l'entité
-        $category->setTitle('Culture');
-        $category->setColor('purple');
+        if($request->isMethod('POST')){
 
-        //dd($category);
+            //1- je récupère ce que j'ai rensigné dans mes inputs du twig associé
+            $newCategoryTitle = $request->request->get('title');
+            $newCategoryColor = $request->request->get('color');
 
-        //Je vais envoyer les infos de cette nouvelle catégorie :
-        $entityManager->persist($category);
-        //puis je vais les inscrire en BDD avec flush
-        $entityManager->flush();
+            //je donne ces valeurs récupéré à ma nouvelle instance de Category
+            $category->setTitle($newCategoryTitle);
+            $category->setColor($newCategoryColor);
 
-
+            //on enregistre ces modification en local
+            $entityManager->persist($category);
+            //puis dans la DB
+            $entityManager->flush();
+            return $this->render('category_create.html.twig', ['category' => $category]);
+        }
+        //si j'ai pas de demande je renvoi juste ma nouvelle Category vide
         return $this->render('category_create.html.twig', ['category' => $category]);
 
     }

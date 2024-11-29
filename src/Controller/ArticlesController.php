@@ -54,13 +54,13 @@ class ArticlesController extends AbstractController
     #[Route(path: '/article/create', name: 'article_create')]
     public function createArticle(EntityManagerInterface $entityManager, Request $request): Response
     {
+        //créer un article
+        //en faisant une nouvelle instance de l'entité Article
         $article = new Article();
         //dd("coucou");
+
         //si j'ai une demande en POST
         if ($request->isMethod('POST')) {
-            //créer un article
-            //en faisant une nouvelle instance de l'entité Article
-
             //je récupère mes nouvelles valeurs via mon post
             $newTitle = $request->request->get('title');
             $newContent = $request->request->get('content');
@@ -89,7 +89,9 @@ class ArticlesController extends AbstractController
     //je doit avoir un id
         //j'appelle une instance de mon Article Repo car je vais avoir besoin de parcourir toutes mes instances de l'entité Article qui sont créée
         //j'appelle une instance d'EntityManager pour pouvoir modifier ma BDD
-    public function deleteArticle(int $id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager): Response
+    public function deleteArticle(int $id,
+                                  ArticleRepository $articleRepository,
+                                  EntityManagerInterface $entityManager): Response
     {
         //dd("coucou");
         //on va chercher l'article avec l'ID qui matche notre recherche
@@ -110,17 +112,29 @@ class ArticlesController extends AbstractController
     }
 
     #[Route(path: '/article/update/{id}', name: 'article_update', requirements: ['id' => '\d+'])]
-    function updateArticle(int $id, EntityManagerInterface $entityManager, ArticleRepository $articleRepository): Response
+    function updateArticle(int $id,
+                           EntityManagerInterface $entityManager,
+                           ArticleRepository $articleRepository,
+                           Request $request): Response
     {
         //dd("coucou");
 
         //je récupère l'article qui correspond à mon ID rentré
         $articleToUpdate = $articleRepository->find($id);
 
+
         //s'il n'existe pas on renvoie vers une 404
         if (!$articleToUpdate) {
             return $this->redirectToRoute('not_found');
         }
+
+        //si j'ai ma un submit
+        if($request->isMethod('POST')) {
+            $newTitle = $request->request->get('title');
+            $newContent = $request->request->get('content');
+            $newImage = $request->request->get('image');
+        }
+
         //dump($articleToUpdate);
 
         //on va modifier les données de notre instance récupérée selon ce que l'on veut
