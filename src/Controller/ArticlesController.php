@@ -71,6 +71,19 @@ class ArticlesController extends AbstractController
         //et en second paramètre je donne l'instance de l'entité Article sur laquelle je vais travailler
         $form = $this->createForm(ArticleType::class, $article);
 
+        //il faut maintenant relier le form avec la requete post lié au formulaire
+        //pour le formulaire généré on récupère les données de la requete réalisé
+        $form->handleRequest($request);
+
+        //est-ce que le formulaire a été envoyé pour ce formulaire ?
+        if($form->isSubmitted()) {
+            //j'ai symfony qui rempli mes champs grace a handleRequest
+            //mais j'ai retiré le champs input de la date de création, donc il faut que je la remplisse automatiquement
+            $article->setCreatedAt(new DateTime());
+            //si oui alors je sauvegarde mon article et je l'envoie à la DB
+            $entityManager->persist($article);
+            $entityManager->flush();
+        }
         //je génère une view du formulaire créé précédemment
         $formView = $form->createView();
 
