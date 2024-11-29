@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -57,31 +58,24 @@ class ArticlesController extends AbstractController
         //créer un article
         //en faisant une nouvelle instance de l'entité Article
         $article = new Article();
-        //dd("coucou");
 
-        //si j'ai une demande en POST
-        if ($request->isMethod('POST')) {
-            //je récupère mes nouvelles valeurs via mon post
-            $newTitle = $request->request->get('title');
-            $newContent = $request->request->get('content');
-            $newImage = $request->request->get('image');
+        //avec l'exécution de la ligne de commande "php bin/console make:form",
+        //on a nommé ce form ArticleType
+        //et il est valide pour l'entité Article (form crée dans le fichier éponyme dans src)
 
-            //Puis on rempli notre nouvel article avec les méthodes set de la classe Article
-            $article->setTitle($newTitle);
-            $article->setContent($newContent);
-            $article->setImage($newImage);
-            $article->setCreatedAt(new DateTime('now'));
+        //je crée ici un formulaire correspondant à ce qui est renseigné dans ArticleType (donc les champs à compléter)
+        //et ça grace à la methode createForm d'AbstractArticle (dont ArticleController hérite)
 
-            //une fois notre instance créée, l'ORM pourra faire correspondre cette instance avec le SQL
-            //utilisation de EntityManagerInterface
-            //on ''''''commit'''''', on envoie nos modif
-            $entityManager->persist($article);
-            //puis on '''push''' donc on envoie à notre BDD le nouvel article
-            $entityManager->flush();
-            return $this->render('article_create.html.twig', ['article' => $article]);
-        }
+        //createForm est une méthode qui demande des paramètres ==>(string $type, mixed $data = null, array $options = [])
+        //le type est le chemin jusqu'à mon "constructeur" de formulaire, je pourrais aussi écrire app\Form\ArticleType (le namespace)
+        //et en second paramètre je donne l'instance de l'entité Article sur laquelle je vais travailler
+        $form = $this->createForm(ArticleType::class, $article);
+
+        //je génère une view du formulaire créé précédemment
+        $formView = $form->createView();
+
         //si j'ai pas de demande je renvoi juste mon nouvel article vide
-        return $this->render('article_create.html.twig', ['article' => $article]);
+        return $this->render('article_create.html.twig', ['formView'=>$formView]);
     }
 
 
@@ -148,8 +142,6 @@ class ArticlesController extends AbstractController
             //puis on va sauvegarder les modifs en DB
             $entityManager->flush();
 
-            //on retourne une vue qui nous montre notre update
-            return $this->render('article_update.html.twig', ['article' => $articleToUpdate, 'postRequest' => $postRequest]);
         }
         //j'envoie à mon twig les valeurs précédentes pour les charger en value dans mes inputs
         //j'envoie aussi mon postRequest pour l'affichage de mon form ou non

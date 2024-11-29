@@ -3,11 +3,13 @@
 {% block metatitle %} Super Article | Article filtré {{ article.title }} {% endblock %}
 
 {% block main %}
-    <article>
-        <h2>{{ article.title }}</h2>
-        <p>{{ article.content }}</p>
-        <div class='imgContainer'>
-            <img src="{{ article.image }}" alt="{{ article.title }}" class="img">
-        </div>
-    </article>
+    <section>
+        <article class="articleSolo">
+            <h2 class="center">{{ article.title }}</h2>
+            <p>{{ article.content }}</p>
+            <div class='imgContainer'>
+                <img src="{{ article.image }}" alt="{{ article.title }}" class="img">
+            </div>
+        </article>
+    </section>
 {% endblock main %}

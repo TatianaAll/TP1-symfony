@@ -128,8 +128,6 @@ class CategoryController extends AbstractController
             $entityManager->persist($categoryToUpdate);
             //on envoie les changement à la DB
             $entityManager->flush();
-
-            return $this->render('category_update.html.twig', ['category' => $categoryToUpdate, 'methodPost' => $methodPost]);
         }
 
 

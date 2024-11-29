@@ -50,6 +50,10 @@ nav > ul {
     text-decoration: none;
     font-family: sans-serif;
 }
+.liHeader:hover{
+    text-decoration: underline;
+    color: gold;
+}
 
 p {
     font-family: sans-serif;
@@ -57,10 +61,6 @@ p {
     margin: auto;
 }
 
-article{
-    width: 50%;
-    border: wheat solid 2px;
-}
 
 .img{
     width: 100%;
@@ -88,6 +88,20 @@ article{
     font-family: sans-serif;
     color:darkorchid;
 }
+.linkForCreate{
+    text-decoration: none;
+    font-family: sans-serif;
+    background-color: chocolate;
+    border-radius: 10px;
+    padding: 1rem;
+    color: wheat;
+    transition: all 0.5s;
+}
+.linkForCreate:hover{
+    text-decoration: underline;
+    background-color: wheat;
+    color: chocolate;
+}
 
 #formSend{
     font-family: sans-serif;
@@ -95,7 +109,7 @@ article{
     margin: auto;
 }
 .formSection{
-    background-color: lightpink;
+    background-color: rgba(255,182,193, 0.6);
     border-radius: 5vmax;
     margin: auto;
     width: 50%;
@@ -104,6 +118,7 @@ article{
     align-items: center;
     justify-content: center;
     height: 200px;
+    font-family: sans-serif;
 }
 
 #formSend>li>span{
@@ -132,6 +147,7 @@ article{
 .liViewSuppr{
     list-style: none;
     text-align: center;
+    margin: 0.3rem;
 }
 .linkArticle.delete{
     color: red;
@@ -139,4 +155,28 @@ article{
 
 .showModif{
     height: 100vh;
+}
+
+.articlesDisplay{
+    width: 30%;
+    background : rgba(250,250,250,0.6);
+    backdrop-filter: blur();
+    margin: 1rem;
+    border-radius:15px;
+}
+.articleSolo{
+    width: 80%;
+    background : rgba(1,1,1,0.6);
+    backdrop-filter: blur();
+    color: whitesmoke;
+    border-radius:25px;
+    margin: auto;
+}
+.center{
+    text-align: center;
+    margin: 1rem;
+}
+
+.pArticle{
+    margin: 0.5rem;
 }
