@@ -5,35 +5,7 @@
 
         <h2>Création de catégorie</h2>
 
-        {# Si ma categorie a toutes les variables obligatoire définies alors j'affiche mon récap #}
-        {% if category.title is not null and category.color is not null %}
-            <section class="formSection showModif">
-                <p>Enregistrement de la création de la nouvelle catégorie "{{ category.title }}" ;)</p>
-
-                <p>Résumé de la nouvelle catégorie : </p>
-                <ul id="formSend">
-                    <li><span>Titre</span> : {{ category.title }}</li>
-                    <li><span>Son thème</span> : {{ category.color }}</li>
-                </ul>
-            </section>
-
-        {% else %}
-
-            {# Sinon j'affiche mon formulaire pour création de la nouvelle catégorie #}
-            <section>
-                <form method="POST">
-                    <div>
-                        <label for="title">Titre</label>
-                        <input type="text" name="title" placeholder="Titre de la catégorie" required>
-                    </div>
-                    <div>
-                        <label for="color">La couleur associée à la catégorie</label>
-                        <input type="text" name="color" placeholder="la couleur associée">
-                    </div>
-                    <button type="submit">Envoyer</button>
-                </form>
-            </section>
-        {% endif %}
+        {{ form(formView) }}
 
 {% endblock %}
 

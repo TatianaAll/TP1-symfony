@@ -12,6 +12,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -60,28 +61,27 @@ class CategoryController extends AbstractController
     public function createCategory(EntityManagerInterface $entityManager,
     Request $request) : Response
     {
-        //dd("coucou");
-
         //je crée une nouvelle instance de l'entité Category
         $category = new Category();
-        if($request->isMethod('POST')){
 
-            //1- je récupère ce que j'ai rensigné dans mes inputs du twig associé
-            $newCategoryTitle = $request->request->get('title');
-            $newCategoryColor = $request->request->get('color');
+        //je fais ma logique avec la création de form automatique
+        //pour la création de mon formulaire je donne à la méthode createForm (héritée d'AbstractController)
+        //1- le chemin de mon gabarit de forumaire donc CategoryType crée avec php bin/console make:form
+        //2- l'instance de l'entité Category nouvellement créé
+       $form= $this->createForm(CategoryType::class, $category);
 
-            //je donne ces valeurs récupéré à ma nouvelle instance de Category
-            $category->setTitle($newCategoryTitle);
-            $category->setColor($newCategoryColor);
+       //je fais la view que je vais renvoyer à mon twig pour la création en HTML du formulaire
+       $formView = $form->createView();
 
-            //on enregistre ces modification en local
+       //je vais compléter mon forumlaire avec les données envoyé en requete post
+        $form->handleRequest($request);
+        //si mon formulaire à bien été soumis je vais enreristrer et pousser dans ma DataBase
+        if ($form->isSubmitted()) {
             $entityManager->persist($category);
-            //puis dans la DB
             $entityManager->flush();
-            return $this->render('category_create.html.twig', ['category' => $category]);
         }
-        //si j'ai pas de demande je renvoi juste ma nouvelle Category vide
-        return $this->render('category_create.html.twig', ['category' => $category]);
+
+        return $this->render('category_create.html.twig', ['formView' => $formView]);
 
     }
 
