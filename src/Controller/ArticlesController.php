@@ -150,7 +150,10 @@ class ArticlesController extends AbstractController
 
             //on retourne une vue qui nous montre notre update
             return $this->render('article_update.html.twig', ['article' => $articleToUpdate, 'postRequest' => $postRequest]);
-        } return $this->render('article_update.html.twig', ['article' => $articleToUpdate, 'postRequest' => $postRequest]);
+        }
+        //j'envoie à mon twig les valeurs précédentes pour les charger en value dans mes inputs
+        //j'envoie aussi mon postRequest pour l'affichage de mon form ou non
+        return $this->render('article_update.html.twig', ['article' => $articleToUpdate, 'postRequest' => $postRequest]);
     }
 
 }
