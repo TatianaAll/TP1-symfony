@@ -109,30 +109,30 @@ class CategoryController extends AbstractController
     {
         //on cherche l'instance de Catégorie qui répond à l'id renseigné
         $categoryToUpdate = $categoryRepository->find($id);
-        $methodPost = false;
-        //si elle n'exsite pas c'est un 404
+
+        //si elle n'existe pas c'est un 404
         if (!$categoryToUpdate) {
             return $this->redirectToRoute('not_found');
         }
-        if($request->isMethod('POST')){
-            $methodPost = true;
-            //on récupère les données rentrées par le user
-            $newCategoryTitle = $request->request->get('title');
-            $newCategoryColor = $request->request->get('color');
 
-            //on changes les infos de notre catégorie
-            $categoryToUpdate->setTitle($newCategoryTitle);
-            $categoryToUpdate->setColor($newCategoryColor);
+        //creation du formulaire associé
+        //on lui donne le chemin vers le gabarit de form
+        //on lui donne l'instance de classe à modifier
+        $form = $this->createForm(CategoryType::class, $categoryToUpdate);
 
+        //on fait la view à partir du formulaire créé
+        $formView = $form->createView();
+
+        //on check les requetes faites sur la page
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()){
             //on enregistre les changements en local
             $entityManager->persist($categoryToUpdate);
             //on envoie les changement à la DB
             $entityManager->flush();
         }
-
-
-        // on retourne une jolie page qui dit que c'est bon
-        return $this->render('category_update.html.twig', ['category' => $categoryToUpdate, 'methodPost' => $methodPost]);
+        return $this->render('category_update.html.twig', ['formView' => $formView]);
     }
 
 
