@@ -7,19 +7,20 @@
 
     <h3 class="center">Categorie(s) correspondante(s) à la recherche : </h3>
     {% for category in categoriesFound %}
-
-        <article class="categoryArticle" style="border: {{ category.color }} dashed 1px;">
-            {# je fais une boucle sur tous mes articles #}
-            <h2 style="color: {{ category.color }}" class="h2Category">{{ category.title }}</h2>
-        </article>
+        <section class="isFlex marginAuto">
+            <article class="categoryArticle" style="border: {{ category.color }} dashed 1px;">
+                {# je fais une boucle sur tous mes articles #}
+                <h2 style="color: {{ category.color }}" class="h2Category">{{ category.title }}</h2>
+            </article>
+        </section>
     {% endfor %}
 
     <h3 class="center">Article(s) correspondant(s) à la recherche : </h3>
     {% for article in articlesFound %}
-        <article class="articleSolo center">
-            <h4>{{ article.title }}</h4>
-            <p>{{ article.content }}</p>
-            <div class="imgContainer">
+        <article class="articleSolo marginAuto">
+            <h4 class="center marginAuto">{{ article.title }}</h4>
+            <p class="center marginAuto">{{ article.content }}</p>
+            <div class="imgContainer marginAuto">
                 <img src="{{ article.image }}" alt="{{ article.title }}" class="img"></img>
             </div>
         </article>
