@@ -4,7 +4,9 @@
 
     <h2 class="center">Création d'article</h2>
 
-    {{ form(formView) }}
+    {{ form_start(formView) }}
+    {{ form_widget (formView, {'attr': {'class':'formSection'}}) }}
+    {{ form_end(formView) }}
 
 {% endblock %}
 

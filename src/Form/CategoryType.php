@@ -29,11 +29,7 @@ class CategoryType extends AbstractType
         // avec setDefaults on défini les valeurs par défaut pour les options du formulaire
         // on lui donne un tableau avec les options par défaut du form
         $resolver->setDefaults([
-            'data_class' => Category::class, // Lié à l'entité Category
-            //attr pour donner des attribut HTML
-            'attr' => [ // Ajout la classe au formulaire
-                'class' => 'formSection',
-            ],
+            'data_class' => Category::class
         ]);
     }
 

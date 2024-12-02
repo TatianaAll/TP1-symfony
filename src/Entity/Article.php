@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,6 +26,10 @@ class Article
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
+
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'articles')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Category $category = null;
 
     public function getId(): ?int
     {
@@ -76,6 +81,17 @@ class Article
     {
         $this->image = $image;
 
+        return $this;
+    }
+
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    public function setCategory(string $category): static
+    {
+        $this -> category = $category;
         return $this;
     }
 }

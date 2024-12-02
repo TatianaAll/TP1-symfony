@@ -5,7 +5,9 @@
 
         <h2>Création de catégorie</h2>
 
-        {{ form(formView) }}
+        {{ form_start(formView) }}
+        {{ form_widget (formView, {'attr': {'class':'formSection'}}) }}
+        {{ form_end(formView) }}
 
 {% endblock %}
 
