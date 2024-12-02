@@ -35,22 +35,6 @@ class ArticlesController extends AbstractController
         return $this->render('article_show.html.twig', ['article' => $articleFound]);
     }
 
-    //on va faire une nouvelle page pour filtrer par categorie : 1- routing
-    #[Route('/articles/search_results', name: 'articles_search_result')]
-    // j'utilise dans ma methode un autowire
-        //je vais donc lui passer en parametre $request en précisant avec le typage que
-        //$request est une instance de la class Request
-        //symfony va m'autocompléter tout pour me faire cette instance de classe sans que j'ai besoin
-        // de préciser les parametres du constructeur
-    public function searchArticle(Request $request): Response
-    {
-
-        //ma variable search contient les informations de get de la requete HTTP
-        $search = $request->query->get('search');
-        //je retourne cette variable dans la page twig associée
-        return $this->render('articles_search_result.html.twig', ['search' => $search]);
-
-    }
 
     #[Route(path: '/article/create', name: 'article_create')]
     public function createArticle(EntityManagerInterface $entityManager, Request $request): Response

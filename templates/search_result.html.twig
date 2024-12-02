@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block metatitle %} Super Article | Resultat de la recherche {% endblock metatitle %}
+
+{% block main %}
+    <h2 class="center">Resultat pour la recherche "{{ search }}"</h2>
+
+    <h3 class="center">Categorie(s) correspondante(s) à la recherche : </h3>
+    {% for category in categoriesFound %}
+
+        <article class="categoryArticle" style="border: {{ category.color }} dashed 1px;">
+            {# je fais une boucle sur tous mes articles #}
+            <h2 style="color: {{ category.color }}" class="h2Category">{{ category.title }}</h2>
+        </article>
+    {% endfor %}
+
+    <h3 class="center">Article(s) correspondant(s) à la recherche : </h3>
+    {% for article in articlesFound %}
+        <article class="articleSolo center">
+            <h4>{{ article.title }}</h4>
+            <p>{{ article.content }}</p>
+            <div class="imgContainer">
+                <img src="{{ article.image }}" alt="{{ article.title }}" class="img"></img>
+            </div>
+        </article>
+    {% endfor %}
+
+{% endblock main %}
+

@@ -16,6 +16,26 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
+    public function search(string $search){
+        //on instancie le queryBuilder qui permet d'aller interroger la dataBase
+        //quand on passe par le querybuilder pour faire des requetes SQL
+        //on appelle les variable avec :nomVariable
+        return $this->createQueryBuilder('a')
+            //je débute ma requet SQL an précisant le where = 1 condition
+            ->where('a.title LIKE :search')
+            //on donne une seconde condition
+            ->orWhere('a.content LIKE :search')
+            //on paramètre la variable search
+            ->setParameter('search', '%'.$search.'%')
+            //on construit la requete SQL à partir des données précisées plus haut
+            ->getQuery()
+            //on récupère les article filtrés par la DB
+            ->getResult();
+
+        //ce qu'on écrit en SQL :
+        // SELECT * FROM article AS WHERE a.title LIKE %search% OR WHERE a.content LIKE %search%
+    }
+
     //    /**
     //     * @return Article[] Returns an array of Article objects
     //     */

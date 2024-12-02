@@ -135,5 +135,4 @@ class CategoryController extends AbstractController
         return $this->render('category_update.html.twig', ['formView' => $formView]);
     }
 
-
 }

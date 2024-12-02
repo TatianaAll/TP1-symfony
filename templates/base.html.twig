@@ -22,8 +22,8 @@
             <li><a href="{{ path('contactForm') }}" class="liHeader">Contact</a></li>
             <li>
                 {# je me crée un formulaire qui renvoie sur la page search articles avec path #}
-                <form method="get" action="{{ path('articles_search_result') }}">
-                    <input type="text" id="search" name="search" placeholder="Rechercher un article">
+                <form method="get" action="{{ path('search_results') }}">
+                    <input type="text" id="search" name="search" placeholder="Rechercher un article" value="{{ app.request.get('search') }}">
                     <button type="submit">Rechercher</button>
                 </form>
             </li>
