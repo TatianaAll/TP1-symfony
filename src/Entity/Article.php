@@ -31,6 +31,9 @@ class Article
     #[ORM\JoinColumn(nullable: true)]
     private ?Category $category = null;
 
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
+    private Collection $comments;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,7 +94,11 @@ class Article
 
     public function setCategory(string $category)
     {
-        $this -> category = $category;
+        $this->category = $category;
         return $this;
     }
+
+    public function getComments(){
+        return $this -> comments;
+}
 }
