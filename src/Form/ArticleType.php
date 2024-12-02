@@ -24,6 +24,7 @@ class ArticleType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Article::class,
+            'attr' => ['class'=>'formSection']
         ]);
     }
 }
