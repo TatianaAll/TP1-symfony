@@ -9,6 +9,17 @@
             <h2 style="color: {{ category.color }}" class="h2Category">{{ category.title }}</h2>
             <p>{{ category.color }}</p>
         </article>
+
+        <h2>Les articles dans cette catégorie :</h2>
+        {% for article in articles %}
+        <article class="articleSolo" style="border: {{ category.color }} solid 1px;">
+            <h3 class="center">{{ article.title }}</h3>
+            <p>{{ article.content }}</p>
+            <div class='imgContainer'>
+                <img src="{{ article.image }}" alt="{{ article.title }}" class="img">
+            </div>
+        </article>
+        {% endfor %}
     </section>
 {% endblock main %}
 

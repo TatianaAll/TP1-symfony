@@ -30,7 +30,6 @@ class CategoryController extends AbstractController
     public function showAllCategories(CategoryRepository $categoryRepository) : Response
     {
         //je vérifie ma route
-//        dump("coucou");die;
 
         //je crée une variable categories qui vaut toutes les catégories trouvé dans ma BDD avec toutes les colonnes
         $categories = $categoryRepository->findAll();
@@ -47,12 +46,13 @@ class CategoryController extends AbstractController
     {
         // j'initie un articleFound à null
         $categoryFound = $categoryRepository->find($id);
+        $articles = $categoryFound->getArticles();
 
         //si je ne trouve pas de categorie
         if ($categoryFound === null) {
             //je redirige vers une 404
             return $this->redirectToRoute('error_404.html.twig');
-        } return $this->render('category_show.html.twig', ['category' => $categoryFound]);
+        } return $this->render('category_show.html.twig', ['category' => $categoryFound, 'articles' => $articles]);
         //sinon je renvoie ma page twig en lui donnant ma categorie trouvé précédement
     }
 
@@ -82,7 +82,6 @@ class CategoryController extends AbstractController
         }
 
         return $this->render('category_create.html.twig', ['formView' => $formView]);
-
     }
 
     #[Route(path:'/category/delete/{id}', name: 'category_delete', requirements: ['id'=>'\d+'])]
